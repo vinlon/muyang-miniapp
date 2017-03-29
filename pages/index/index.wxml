@@ -1,17 +1,9 @@
 <!--index.wxml-->
-<import src="../common/header.wxml" />
-<import src="../common/footer.wxml" />
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
 
 <view class="container">
-  <template is="header" data="{{title: '首页'}}"/>
+  <template is="head" data="{{title: '测试'}}"/>
 
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-
-  <template is="footer"/>
+  <template is="foot"/>
 </view>
