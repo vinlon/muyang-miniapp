@@ -1,0 +1,23 @@
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data=""/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+        <block wx:if="{{src === ''}}">
+          <view class="image-plus image-plus-nb" bindtap="chooseVideo">
+            <view class="image-plus-horizontal"></view>
+            <view class="image-plus-vertical"></view>
+          </view>
+          <view class="image-plus-text">添加视频</view>
+        </block>
+        <block wx:if="{{src != ''}}">
+          <video src="{{src}}" class="video"></video>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,12 +1,11 @@
-//index.js
+//text.js
 
 //获取应用实例
 var app = getApp()
 Page({
 	data:{
-		userInfo:{}
 	},
   	onLoad: function () {
-  		console.log('加载最新动态');
+  		console.log('发布文字日记');
   	}
 })
