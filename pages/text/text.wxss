@@ -1,1 +1,27 @@
 /* pages/text/text.wxss */
+
+.input-area {
+	display:flex;
+}
+
+
+.side-bar {
+	width:100rpx;
+	padding:10rpx;
+}
+.side-bar-item {
+	
+}
+.side-bar-item image {
+	width: 80rpx;
+	height: 80rpx;
+}
+
+textarea {
+    width: 580rpx;
+    padding: 25rpx 0;
+}
+.textarea-wrp {
+    padding: 0 25rpx;
+    background-color: #fff;
+}

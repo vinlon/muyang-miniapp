@@ -9,12 +9,18 @@
       <navigator url="../text/text" hover-class="navigator-hover">
         <button type="primary" size="mini">文字</button>
       </navigator>
+    </view>
+    <view class="page-section">
       <navigator url="../voice/voice" hover-class="navigator-hover">
         <button type="primary" size="mini">录音</button>
       </navigator>
+    </view>
+    <view class="page-section">
       <navigator url="../image/image" hover-class="navigator-hover">
         <button type="primary" size="mini">图片</button>
       </navigator>
+    </view>
+    <view class="page-section">
       <navigator url="../video/video" hover-class="navigator-hover">
         <button type="primary" size="mini">视频</button>
       </navigator>

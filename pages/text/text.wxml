@@ -1,20 +1,27 @@
-
 <!--text.wxml-->
+
 <import src="../common/head.wxml" />
 <import src="../common/foot.wxml" />
 <view class="container">
   <template is="head" data="" />
   <view class="page-body">
-    <view class="page-section">
-      <view class="page-section-title">输入区域高度自适应，不会出现滚动条</view>
-      <view class="textarea-wrp">
-        <textarea bindblur="bindTextAreaBlur" auto-height />
+    <view class="input-area">
+      <view class="side-bar">
+        <view class="side-bar-item" bindtap="showTextPanel">
+          <image src="/img/record.png"></image>
+        </view>
+        <view class="side-bar-item" bindtap="showVoicePanel">
+          <image src="/img/record.png"></image>
+        </view>
+        <view class="side-bar-item" bindtap="showImagePanel">
+          <image src="/img/record.png"></image>
+        </view>
+        <view class="side-bar-item" bindtap="showVideoPanel">
+          <image src="/img/record.png"></image>
+        </view>
       </view>
-    </view>
-    <view class="page-section">
-      <view class="page-section-title">这是一个可以自动聚焦的textarea</view>
       <view class="textarea-wrp">
-        <textarea auto-focus="true" style="height: 3em" />
+        <textarea auto-focus="true" style="height: 10em" />
       </view>
     </view>
   </view>

@@ -1,5 +1,2 @@
 <template name="foot">
-  <navigator class="page-foot" openType="switchTab" url="/pages/index/index" hover-class="none">
-    <view>沐阳记</view>
-  </navigator>
 </template>

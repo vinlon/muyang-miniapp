@@ -26,24 +26,22 @@ page {
     font-size: 32rpx;
     color: #BEBEBE;
 }
-.page-head-line{
-    margin: 0 auto;
-    width: 80%;
-    height: 2rpx;
-    background-color: #D8D8D8;
-}
-
 .page-body {
   width: 100%;
   flex-grow: 1;
   overflow-x: hidden;
 }
-
 .page-section{
   width: 100%;
   margin-bottom: 60rpx;
 }
-
+.page-section-title{
+  font-size: 28rpx;
+  color: #999999;
+  margin-bottom: 10rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
 .page-foot{
   margin: 100rpx 0 30rpx 0;
   text-align: center;
