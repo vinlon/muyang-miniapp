@@ -1,25 +1,24 @@
+
 <!--index.wxml-->
 <import src="../common/head.wxml" />
 <import src="../common/foot.wxml" />
-
 <view class="container">
-
-  	<template is="head" data=""/>
-	  	<view class="page-body">
-			<view class="page-section">
-				<navigator url="../text/text" hover-class="navigator-hover">
-					<button type="primary" size="mini">文字</button>
-				</navigator>
-				<navigator url="../voice/voice" hover-class="navigator-hover">
-					<button type="primary" size="mini">录音</button>
-				</navigator>
-				<navigator url="../image/image" hover-class="navigator-hover">
-					<button type="primary" size="mini">图片</button>
-				</navigator>
-				<navigator url="../video/video" hover-class="navigator-hover">
-					<button type="primary" size="mini">视频</button>
-				</navigator>
-			</view>
-		</view>
-  	<template is="foot"/>
+  <template is="head" data="" />
+  <view class="page-body">
+    <view class="page-section">
+      <navigator url="../text/text" hover-class="navigator-hover">
+        <button type="primary" size="mini">文字</button>
+      </navigator>
+      <navigator url="../voice/voice" hover-class="navigator-hover">
+        <button type="primary" size="mini">录音</button>
+      </navigator>
+      <navigator url="../image/image" hover-class="navigator-hover">
+        <button type="primary" size="mini">图片</button>
+      </navigator>
+      <navigator url="../video/video" hover-class="navigator-hover">
+        <button type="primary" size="mini">视频</button>
+      </navigator>
+    </view>
+  </view>
+  <template is="foot" />
 </view>

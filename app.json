@@ -1,15 +1,32 @@
 {
-	"pages":[
-		"pages/index/index",
-		"pages/text/text",
-		"pages/voice/voice",
-		"pages/image/image",
-		"pages/video/video"
-	],
-	"window":{
-		"backgroundTextStyle":"light",
-		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTitleText": "WeChat",
-		"navigationBarTextStyle":"black"
-	}
+    "pages": [
+        "pages/index/index",
+        "pages/text/text",
+        "pages/voice/voice",
+        "pages/image/image",
+        "pages/video/video"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#7A7E83",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [{
+            "pagePath": "pages/index/index",
+            "iconPath": "img/series.png",
+            "selectedIconPath": "img/series_selected.png",
+            "text": "我的"
+        }, {
+            "pagePath": "pages/text/text",
+            "iconPath": "img/mark.png",
+            "selectedIconPath": "img/mark_selected.png",
+            "text": "记录"
+        }]
+    }
 }

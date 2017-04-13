@@ -12,10 +12,9 @@ Page({
     formatedRecordTime: '00:00:00',
     formatedPlayTime: '00:00:00'
   },
-  onLoad: function() {
-    console.log('发布语音日记')
+  onLoad: function () {
   },
-  onHide: function() {
+  onHide: function () {
     if (this.data.playing) {
       this.stopVoice()
     } else if (this.data.recording) {
@@ -47,13 +46,13 @@ Page({
       }
     })
   },
-  stopRecord: function() {
+  stopRecord: function () {
     wx.stopRecord()
   },
   stopRecordUnexpectedly: function () {
     var that = this
     wx.stopRecord({
-      success: function() {
+      success: function () {
         console.log('stop record success')
         clearInterval(recordTimeInterval)
         that.setData({

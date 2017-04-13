@@ -5,6 +5,8 @@ Page({
     sizeType: ['original'],
     maxCount: 9
   },
+  onLoad: function() {
+  },
   sourceTypeChange: function (e) {
     this.setData({
       sourceTypeIndex: e.detail.value

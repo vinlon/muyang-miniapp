@@ -6,6 +6,5 @@ Page({
 	data:{
 	},
   	onLoad: function () {
-  		console.log('发布文字日记');
   	}
 })

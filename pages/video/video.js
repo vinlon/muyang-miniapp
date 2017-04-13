@@ -7,7 +7,6 @@ Page({
     src: ''
   },
   onLoad: function() {
-    console.log('发布视频日记')
   },
   chooseVideo: function () {
     var that = this
