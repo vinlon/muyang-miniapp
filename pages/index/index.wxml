@@ -17,7 +17,7 @@
                     <image class="image__fix__width" src="http://media.gettyimages.com/photos/african-eagle-owl-picture-id154961676?s=612x612" mode="aspectFit"></image>
                     <view class="weui-media-box__info">
                         <view class="weui-media-box__info__meta">发布于 2017-03-16 10:42:52</view>
-                        <navigator url="../text/text" class="weui-media-box__info__meta weui-media-box__info__meta_extra text_link" hover-class="navigator-hover">
+                        <navigator url="../image/image" class="weui-media-box__info__meta weui-media-box__info__meta_extra text_link">
                             查看更多
                         </navigator>
                     </view>
@@ -32,7 +32,9 @@
                     <view class="weui-media-box__desc">好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来</view>
                     <view class="weui-media-box__info">
                         <view class="weui-media-box__info__meta">发布于 2017-03-16 10:42:52</view>
-                        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra text_link">查看更多</view>
+                        <navigator url="../voice/voice" class="weui-media-box__info__meta weui-media-box__info__meta_extra text_link">
+                            查看更多
+                        </navigator>
                     </view>
                 </view>
             </view>
