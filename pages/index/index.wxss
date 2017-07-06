@@ -1,1 +1,24 @@
 /**index.wxss**/
+
+.index__hd {
+    background-color: #fff;
+    border: 1rpx solid #e5e5e5;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+.index__hd__title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.index__hd__desc {
+    margin-top: 5px;
+    color: #888888;
+    font-size: 14px;
+}
+
+.image__fix__width {
+    width: 95%;
+}

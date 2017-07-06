@@ -1,30 +1,42 @@
-
 <!--index.wxml-->
 <import src="../common/head.wxml" />
 <import src="../common/foot.wxml" />
 <view class="container">
-  <template is="head" data="" />
-  <view class="page-body">
-    <view class="page-section">
-      <navigator url="../text/text" hover-class="navigator-hover">
-        <button type="primary" size="mini">文字</button>
-      </navigator>
+    <template is="head" data="" />
+    <view class="page__bd">
+        <view class="index__hd">
+            <view class="index__hd__title">【挠挠】今天已经出生</view>
+            <view class="index__hd__desc">111天1小时1分钟</view>
+        </view>
+        <view class="weui-panel">
+            <view class="weui-panel__hd">
+                <text class="text_primary">大头爸爸</text>的最新动态</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来</view>
+                    <image class="image__fix__width" src="http://media.gettyimages.com/photos/african-eagle-owl-picture-id154961676?s=612x612" mode="aspectFit"></image>
+                    <view class="weui-media-box__info">
+                        <view class="weui-media-box__info__meta">发布于 2017-03-16 10:42:52</view>
+                        <navigator url="../text/text" class="weui-media-box__info__meta weui-media-box__info__meta_extra text_link" hover-class="navigator-hover">
+                            查看更多
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-panel">
+            <view class="weui-panel__hd">
+                <text class="text_primary">奶瓶妈妈</text>的最新动态</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来好久没有记录挠挠的日常了……懒爸爸要振作起来</view>
+                    <view class="weui-media-box__info">
+                        <view class="weui-media-box__info__meta">发布于 2017-03-16 10:42:52</view>
+                        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra text_link">查看更多</view>
+                    </view>
+                </view>
+            </view>
+        </view>
     </view>
-    <view class="page-section">
-      <navigator url="../voice/voice" hover-class="navigator-hover">
-        <button type="primary" size="mini">录音</button>
-      </navigator>
-    </view>
-    <view class="page-section">
-      <navigator url="../image/image" hover-class="navigator-hover">
-        <button type="primary" size="mini">图片</button>
-      </navigator>
-    </view>
-    <view class="page-section">
-      <navigator url="../video/video" hover-class="navigator-hover">
-        <button type="primary" size="mini">视频</button>
-      </navigator>
-    </view>
-  </view>
-  <template is="foot" />
+    <template is="foot" />
 </view>

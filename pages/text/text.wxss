@@ -1,5 +1,3 @@
-/* pages/text/text.wxss */
-
 .input-area {
 	display:flex;
 }

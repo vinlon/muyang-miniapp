@@ -1,5 +1,3 @@
-@import "../common/lib/weui.wxss";
-
 .page-body-info {
   display: flex;
   margin-top: 40rpx;

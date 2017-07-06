@@ -1,4 +1,2 @@
 <template name="head">
-	<view class="page-head">
-    </view>
 </template>

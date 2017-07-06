@@ -28,7 +28,6 @@ App({
       var that = this
       wx.getLocation({
         success: function (res) {
-          console.log(res)
           that.globalData.location = util.formatLocation(res.longitude, res.latitude)
         }
       })

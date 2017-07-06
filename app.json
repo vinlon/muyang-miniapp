@@ -28,5 +28,12 @@
             "selectedIconPath": "img/mark_selected.png",
             "text": "日记"
         }]
-    }
+    },
+    "networkTimeout": {
+        "request": 10000,
+        "connectSocket": 10000,
+        "uploadFile": 10000,
+        "downloadFile": 10000
+    },
+    "debug": false
 }
