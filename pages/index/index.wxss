@@ -8,7 +8,6 @@
 }
 
 .index__hd__title {
-    text-align: left;
     font-size: 20px;
     font-weight: 600;
 }
@@ -19,6 +18,3 @@
     font-size: 14px;
 }
 
-.image__fix__width {
-    width: 95%;
-}

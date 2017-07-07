@@ -43,3 +43,7 @@ page {
 .text_link {
     color: #586C94
 }
+
+.image__fix__width {
+    width: 95%;
+}

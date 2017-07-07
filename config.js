@@ -12,6 +12,12 @@ var config = {
     //获取宝宝年龄
     getAgeUrl: `https://${host}/muyang/age`,
 
+    //获取文字日志列表
+    textListUrl: `https://${host}/note/textList`,
+
+    //获取图片日志列表
+    imageListUrl: `https://${host}/note/imageList`,
+
     //获取最新动态
     latestNotesUrl: `https://${host}/note/latest`
 };

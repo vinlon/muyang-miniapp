@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/note/note",
         "pages/text/text",
         "pages/voice/voice",
         "pages/image/image",
