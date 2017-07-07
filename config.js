@@ -2,7 +2,7 @@
  * 小程序配置文件
  */
 
-var host = "mynote.wang/muyang_note/my_note/"
+var host = 'mynote.wang/muyang_note/my_note/'
 
 var config = {
 

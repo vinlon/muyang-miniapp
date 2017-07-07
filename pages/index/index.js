@@ -7,10 +7,13 @@ var util = require('../../util/util.js')
 
 Page({
     data: {
-        age: {},
-        latestNotes: []
+        age: null,
+        latestNotes: null
     },
     onLoad: function() {
+        wx.showLoading({
+            'title': '加载中'
+        })
         this.getAge()
         this.getLatestNotes()
     },
@@ -28,7 +31,22 @@ Page({
                     method: 'GET',
                     success: function(res) {
                         that.setData({ age: res.data.data })
+                        if (that.data.latestNotes) {
+                            wx.hideLoading()
+                        }
+                    },
+                    fail: function(err) {
+                        console.log(err)
+                        wx.showToast({
+                            'title': '服务器错误',
+                            'icon': 'loading'
+                        })
                     }
+                })
+            } else {
+                wx.showToast({
+                    'title': '登录失败',
+                    'icon': 'loading'
                 })
             }
         })
@@ -47,7 +65,22 @@ Page({
                     method: 'GET',
                     success: function(res) {
                         that.setData({ latestNotes: res.data.data })
+                        if (that.data.age) {
+                            wx.hideLoading()
+                        }
+                    },
+                    fail: function(err) {
+                        console.log(err)
+                        wx.showToast({
+                            'title': '服务器错误',
+                            'icon': 'loading'
+                        })
                     }
+                })
+            } else {
+                wx.showToast({
+                    'title': '登录失败',
+                    'icon': 'loading'
                 })
             }
         })
