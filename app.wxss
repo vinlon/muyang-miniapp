@@ -45,5 +45,6 @@ page {
 }
 
 .image__fix__width {
+    padding-top: 5px;
     width: 95%;
 }

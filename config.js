@@ -2,7 +2,7 @@
  * 小程序配置文件
  */
 
-var host = 'mynote.wang/muyang_note/my_note/'
+var host = 'https://mynote.wang/muyang_note/my_note/'
 
 var config = {
 
@@ -10,16 +10,16 @@ var config = {
     host,
 
     //获取宝宝年龄
-    getAgeUrl: `https://${host}/muyang/age`,
+    getAgeUrl: `${host}/muyang/age`,
 
     //获取文字日志列表
-    textListUrl: `https://${host}/note/textList`,
+    textListUrl: `${host}/note/textList`,
 
     //获取图片日志列表
-    imageListUrl: `https://${host}/note/imageList`,
+    imageListUrl: `${host}/note/imageList`,
 
     //获取最新动态
-    latestNotesUrl: `https://${host}/note/latest`
+    latestNotesUrl: `${host}/note/latest`
 };
 
 module.exports = config

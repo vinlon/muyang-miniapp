@@ -22,12 +22,12 @@
             "pagePath": "pages/index/index",
             "iconPath": "img/series.png",
             "selectedIconPath": "img/series_selected.png",
-            "text": "我的"
+            "text": "最新动态"
         }, {
             "pagePath": "pages/text/text",
             "iconPath": "img/mark.png",
             "selectedIconPath": "img/mark_selected.png",
-            "text": "日记"
+            "text": "沐阳记"
         }]
     },
     "networkTimeout": {

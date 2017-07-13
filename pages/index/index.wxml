@@ -19,7 +19,7 @@
                     </block>
                     <block wx:if="{{ item.type == 'image' }}">
                         <view class="weui-media-box__desc">{{ item.comment }}</view>
-                        <image class="image__fix__width" src="http://media.gettyimages.com/photos/african-eagle-owl-picture-id154961676?s=612x612" mode="aspectFit"></image>
+                        <image class="image__fix__width" src="{{ host + item.image_path}}" mode="aspectFit" data-image_path="{{ host + item.image_path}}" bindtap="previewImage"></image>
                     </block>
                     <view class="weui-media-box__info">
                         <view class="weui-media-box__info__meta">发布于 {{ item.time }}</view>

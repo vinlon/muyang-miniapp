@@ -7,8 +7,7 @@ var util = require('../../util/util.js')
 
 Page({
     data: {
-        age: null,
-        latestNotes: null
+        host: config.host
     },
     onLoad: function() {
         wx.showLoading({
@@ -83,6 +82,15 @@ Page({
                     'icon': 'loading'
                 })
             }
+        })
+    },
+
+    //图片预览
+    previewImage: function(e) {
+        var image_path = e.currentTarget.dataset.image_path
+        wx.previewImage({
+            current: image_path, // 当前显示图片的http链接
+            urls: [image_path] // 需要预览的图片http链接列表
         })
     }
 

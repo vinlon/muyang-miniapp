@@ -5,9 +5,9 @@ var sliderWidth = 96 // 需要设置slider的宽度，用于计算中间位置
 var app = getApp()
 var config = require('../../config.js')
 var util = require('../../util/util.js')
-
 Page({
     data: {
+        host: config.host,
         tabs: ["日志", "图片", "语音"],
         activeIndex: 0,
         sliderOffset: 0,
@@ -109,6 +109,15 @@ Page({
             }, 1000)
 
         }
+    },
+
+    //图片预览
+    previewImage: function(e) {
+        var image_path = e.currentTarget.dataset.image_path
+        wx.previewImage({
+            current: image_path, // 当前显示图片的http链接
+            urls: [image_path] // 需要预览的图片http链接列表
+        })
     }
 
 })
