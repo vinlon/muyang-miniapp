@@ -4,56 +4,142 @@
 <view class="container">
     <template is="head" data="" />
     <view class="page__bd">
-        <view class="weui-tab">
-            <view class="weui-navbar">
-                <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-                        <view class="weui-navbar__title">{{item}}</view>
-                    </view>
-                </block>
-                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+        <view class="weui-cells__title">
+            <block wx:for="{{menuList}}" wx:key="*this">
+                <view class="{{ index == menuIndex ? 'menu_item_selected' : 'menu_item' }}" data-selected_index="{{ index }}" bindtap="onMenuClick">
+                    <image class="menu_image" src="/img/{{ index == menuIndex ? item + '_selected' : item }}.png"></image>
+                </view>
+            </block>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell" wx:if="{{ menuList[menuIndex]=='text' }}">
+                <view class="weui-cell__bd">
+                    <textarea class="note_input weui-textarea" auto-focus="true" bindinput="onNoteChange" placeholder="说点什么吧" />
+                    <view class="weui-textarea-counter">{{ currentWordCount }}/{{ wordCountLimit }}</view>
+                </view>
             </view>
-            <view class="weui-tab__panel">
-                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <view class="weui-panel" wx:for="{{ showNoteList }}" wx:key="*this">
-                        <view class="weui-panel__bd">
-                            <view class="weui-media-box weui-media-box_text">
-                                <view class="weui-media-box__desc">{{ item.content }}</view>
-                                <view class="weui-media-box__info">
-                                    <view class="weui-media-box__info__meta">{{ item.friend_time }}</view>
+            <view class="weui-cell" wx:if="{{ menuList[menuIndex]=='image' }}">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title">图片上传</view>
+                            <view class="weui-uploader__info">{{files.length}}/2</view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{files}}" wx:key="*this">
+                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                                <view class="weui-uploader__file weui-uploader__file_status">
+                                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                                    <view class="weui-uploader__file-content">
+                                        <icon type="warn" size="23" color="#F43530"></icon>
+                                    </view>
                                 </view>
+                                <view class="weui-uploader__file weui-uploader__file_status">
+                                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                                    <view class="weui-uploader__file-content">50%</view>
+                                </view>
+                            </view>
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
                             </view>
                         </view>
                     </view>
                 </view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view class="weui-panel" wx:for="{{ showNoteList }}" wx:key="*this">
-                        <view class="weui-panel__bd">
-                            <view class="weui-media-box weui-media-box_text">
-                                <view class="weui-media-box__desc">{{ item.comment }}</view>
-                                <image class="image__fix__width" src="{{ host + item.image_path}}" mode="aspectFit" data-image_path="{{ host + item.image_path}}" bindtap="previewImage"></image>
-                                <view class="weui-media-box__info">
-                                    <view class="weui-media-box__info__meta">{{ item.friend_time }}</view>
+            </view>
+            <view class="weui-cell" wx:if="{{ menuList[menuIndex]=='voice' }}">
+                <view class="weui-cell__bd">
+                    <block wx:if="{{recording === false && playing === false && hasRecord === false}}">
+                        <view class="page-body-time">
+                            <text class="time-big">{{formatedRecordTime}}</text>
+                        </view>
+                        <view class="page-body-buttons">
+                            <view class="page-body-button"></view>
+                            <view class="page-body-button" bindtap="startRecord">
+                                <image src="/img/record.png"></image>
+                            </view>
+                            <view class="page-body-button"></view>
+                        </view>
+                    </block>
+                    <block wx:if="{{recording === true}}">
+                        <view class="page-body-time">
+                            <text class="time-big">{{formatedRecordTime}}</text>
+                        </view>
+                        <view class="page-body-buttons">
+                            <view class="page-body-button"></view>
+                            <view class="page-body-button" bindtap="stopRecord">
+                                <view class="button-stop-record"></view>
+                            </view>
+                            <view class="page-body-button"></view>
+                        </view>
+                    </block>
+                    <block wx:if="{{hasRecord === true && playing === false}}">
+                        <view class="page-body-time">
+                            <text class="time-big">{{formatedPlayTime}}</text>
+                            <text class="time-small">{{formatedRecordTime}}</text>
+                        </view>
+                        <view class="page-body-buttons">
+                            <view class="page-body-button"></view>
+                            <view class="page-body-button" bindtap="playVoice">
+                                <image src="/img/play.png"></image>
+                            </view>
+                            <view class="page-body-button" bindtap="clear">
+                                <image src="/img/trash.png"></image>
+                            </view>
+                        </view>
+                    </block>
+                    <block wx:if="{{hasRecord === true && playing === true}}">
+                        <view class="page-body-time">
+                            <text class="time-big">{{formatedPlayTime}}</text>
+                            <text class="time-small">{{formatedRecordTime}}</text>
+                        </view>
+                        <view class="page-body-buttons">
+                            <view class="page-body-button" bindtap="stopVoice">
+                                <image src="/img/stop.png"></image>
+                            </view>
+                            <view class="page-body-button" bindtap="pauseVoice">
+                                <image src="/img/pause.png"></image>
+                            </view>
+                            <view class="page-body-button" bindtap="clear">
+                                <image src="/img/trash.png"></image>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="weui-cell" wx:if="{{ menuList[menuIndex]=='video' }}">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title">视频上传</view>
+                            <view class="weui-uploader__info">{{files.length}}/2</view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{files}}" wx:key="*this">
+                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                                <view class="weui-uploader__file weui-uploader__file_status">
+                                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                                    <view class="weui-uploader__file-content">
+                                        <icon type="warn" size="23" color="#F43530"></icon>
+                                    </view>
                                 </view>
+                                <view class="weui-uploader__file weui-uploader__file_status">
+                                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                                    <view class="weui-uploader__file-content">50%</view>
+                                </view>
+                            </view>
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
                             </view>
                         </view>
                     </view>
-                </view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-                    <view class="weui-panel" wx:for="{{ showNoteList }}" wx:key="*this">
-                        <view class="weui-panel__bd">
-                            <view class="weui-media-box weui-media-box_text">
-                                <view class="weui-media-box__desc">开发中，敬请期待</view>
-                                <view class="weui-media-box__info">
-                                    <view class="weui-media-box__info__meta">{{ item.friend_time }}</view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-                <view class="weui-loadmore" wx:if="{{ loadingMore }}">
-                    <view class="weui-loading"></view>
-                    <view class="weui-loadmore__tips">正在加载</view>
                 </view>
             </view>
         </view>

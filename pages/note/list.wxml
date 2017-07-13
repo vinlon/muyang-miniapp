@@ -1,0 +1,62 @@
+<!--list.wxml-->
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+<view class="container">
+    <template is="head" data="" />
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                    <view class="weui-panel" wx:for="{{ showNoteList }}" wx:key="*this">
+                        <view class="weui-panel__bd">
+                            <view class="weui-media-box weui-media-box_text">
+                                <view class="weui-media-box__desc">{{ item.content }}</view>
+                                <view class="weui-media-box__info">
+                                    <view class="weui-media-box__info__meta">{{ item.friend_time }}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    <view class="weui-panel" wx:for="{{ showNoteList }}" wx:key="*this">
+                        <view class="weui-panel__bd">
+                            <view class="weui-media-box weui-media-box_text"> 
+                                <view class="weui-media-box__desc">{{ item.comment }}</view>
+                                <image class="image__fix__width" src="{{ host + item.image_path}}" mode="aspectFit" data-image_path="{{ host + item.image_path}}" bindtap="previewImage"></image>
+                                <view class="weui-media-box__info">
+                                    <view class="weui-media-box__info__meta">{{ item.friend_time }}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+                    <view class="weui-panel">
+                        <view class="weui-panel__bd">
+                            <view class="weui-media-box weui-media-box_text">
+                                <view class="weui-media-box__desc">开发中，敬请期待</view>
+                                <view class="weui-media-box__info">
+                                    <view class="weui-media-box__info__meta">未来某天</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-loadmore" wx:if="{{ loadingMore }}">
+                    <view class="weui-loading"></view>
+                    <view class="weui-loadmore__tips">正在加载</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <template is="foot" />
+</view>

@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/note/list",
         "pages/note/note",
         "pages/text/text",
         "pages/voice/voice",
@@ -19,15 +20,15 @@
         "borderStyle": "black",
         "backgroundColor": "#ffffff",
         "list": [{
+            "pagePath": "pages/note/note",
+            "iconPath": "img/mark.png",
+            "selectedIconPath": "img/mark_selected.png",
+            "text": "沐阳记"
+        }, {
             "pagePath": "pages/index/index",
             "iconPath": "img/series.png",
             "selectedIconPath": "img/series_selected.png",
             "text": "最新动态"
-        }, {
-            "pagePath": "pages/text/text",
-            "iconPath": "img/mark.png",
-            "selectedIconPath": "img/mark_selected.png",
-            "text": "沐阳记"
         }]
     },
     "networkTimeout": {

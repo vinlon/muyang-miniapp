@@ -1,122 +1,152 @@
 //node.js
-var sliderWidth = 96 // 需要设置slider的宽度，用于计算中间位置
 
 //获取应用实例
 var app = getApp()
-var config = require('../../config.js')
-var util = require('../../util/util.js')
+var menu_index_cache_key = 'note_menu_index';
+
 Page({
     data: {
-        host: config.host,
-        tabs: ["日志", "图片", "语音"],
-        activeIndex: 0,
-        sliderOffset: 0,
-        sliderLeft: 0,
-        pageIndex: 1,
-        pageSize: 8,
-        loadingMore: false
+        wordCountLimit: 50,
+        currentWordCount: 0,
+        menuList: [
+            'text', 'image', 'voice', 'video'
+        ],
+        menuIndex: 0,
+
+        recording: false,
+        playing: false,
+        hasRecord: false,
+        recordTime: 0,
+        playTime: 0,
+        formatedRecordTime: '00:00:00',
+        formatedPlayTime: '00:00:00'
     },
     onLoad: function(option) {
-        //接收GET参数
+        var cached_menu_index = wx.getStorage({ key: menu_index_cache_key })
         this.setData({
-            openid: option.openid
+            menuIndex: cached_menu_index
         })
+    },
+    onHide: function() {
+        if (this.data.playing) {
+            this.stopVoice()
+        } else if (this.data.recording) {
+            this.stopRecordUnexpectedly()
+        }
+    },
 
-        //计算tab间距
+    //输入框文本发生变化 
+    onNoteChange: function(e) {
+        this.setData({
+            currentWordCount: e.detail.value.length
+        })
+    },
+
+    //菜单点击事件处理
+    onMenuClick: function(e) {
+        var selected_index = parseInt(e.currentTarget.dataset.selected_index)
+        wx.setStorage({
+            key: menu_index_cache_key,
+            data: selected_index
+        })
+        this.setData({
+            menuIndex: selected_index
+        })
+    },
+    startRecord: function() {
+        this.setData({ recording: true })
+
         var that = this
-        wx.getSystemInfo({
+        recordTimeInterval = setInterval(function() {
+            var recordTime = that.data.recordTime += 1
+            that.setData({
+                formatedRecordTime: util.formatTime(that.data.recordTime),
+                recordTime: recordTime
+            })
+        }, 1000)
+        wx.startRecord({
             success: function(res) {
                 that.setData({
-                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+                    hasRecord: true,
+                    tempFilePath: res.tempFilePath,
+                    formatedPlayTime: util.formatTime(that.data.playTime)
+                })
+            },
+            complete: function() {
+                that.setData({ recording: false })
+                clearInterval(recordTimeInterval)
+            }
+        })
+    },
+    stopRecord: function() {
+        wx.stopRecord()
+    },
+    stopRecordUnexpectedly: function() {
+        var that = this
+        wx.stopRecord({
+            success: function() {
+                console.log('stop record success')
+                clearInterval(recordTimeInterval)
+                that.setData({
+                    recording: false,
+                    hasRecord: false,
+                    recordTime: 0,
+                    formatedRecordTime: util.formatTime(0)
                 })
             }
         })
-
-        this.getNoteList()
     },
-    tabClick: function(e) {
-        this.setData({
-            sliderOffset: e.currentTarget.offsetLeft,
-            activeIndex: parseInt(e.currentTarget.id)
-        })
-        this.getNoteList()
-    },
-
-    //查询日志列表
-    getNoteList: function() {
-        wx.showLoading({
-            'title': '加载中'
-        })
-        var url = null
-        this.data.pageIndex = 1
-        switch (this.data.activeIndex) {
-            case 0:
-                url = config.textListUrl
-                this.data.pageSize = 8
-                break
-            case 1:
-                url = config.imageListUrl
-                this.data.pageSize = 3
-                break
-            case 2:
-                break
-        }
+    playVoice: function() {
         var that = this
-        if (url) {
-            wx.request({
-                url: url,
-                header: {
-                    ticket: that.data.openid
-                },
-                method: 'POST',
-                success: function(res) {
-                    that.setData({
-                        noteList: res.data.data,
-                        showNoteList: res.data.data.slice(0, that.data.pageIndex * that.data.pageSize)
-                    })
-                    wx.hideLoading()
-                },
-                fail: function(err) {
-                    console.log(err)
-                    wx.showToast({
-                        'title': '服务器错误',
-                        'icon': 'loading'
-                    })
-                }
+        playTimeInterval = setInterval(function() {
+            var playTime = that.data.playTime + 1
+            console.log('update playTime', playTime)
+            that.setData({
+                playing: true,
+                formatedPlayTime: util.formatTime(playTime),
+                playTime: playTime
             })
-        }
-    },
-
-    //加载更多数据
-    onReachBottom: function() {
-        if (this.data.showNoteList.length < this.data.noteList.length) {
-            this.setData({
-                loadingMore: true
-            })
-
-            //延时1秒种，假装在加载数据
-            var that = this
-            setTimeout(function() {
+        }, 1000)
+        wx.playVoice({
+            filePath: this.data.tempFilePath,
+            success: function() {
+                clearInterval(playTimeInterval)
+                var playTime = 0
+                console.log('play voice finished')
                 that.setData({
-                    pageIndex: that.data.pageIndex + 1,
-                    showNoteList: that.data.noteList.slice(0, (that.data.pageIndex + 1) * that.data.pageSize)
+                    playing: false,
+                    formatedPlayTime: util.formatTime(playTime),
+                    playTime: playTime
                 })
-
-                that.setData({
-                    loadingMore: false
-                })
-            }, 1000)
-
-        }
+            }
+        })
     },
-
-    //图片预览
-    previewImage: function(e) {
-        var image_path = e.currentTarget.dataset.image_path
-        wx.previewImage({
-            current: image_path, // 当前显示图片的http链接
-            urls: [image_path] // 需要预览的图片http链接列表
+    pauseVoice: function() {
+        clearInterval(playTimeInterval)
+        wx.pauseVoice()
+        this.setData({
+            playing: false
+        })
+    },
+    stopVoice: function() {
+        clearInterval(playTimeInterval)
+        this.setData({
+            playing: false,
+            formatedPlayTime: util.formatTime(0),
+            playTime: 0
+        })
+        wx.stopVoice()
+    },
+    clear: function() {
+        clearInterval(playTimeInterval)
+        wx.stopVoice()
+        this.setData({
+            playing: false,
+            hasRecord: false,
+            tempFilePath: '',
+            formatedRecordTime: util.formatTime(0),
+            recordTime: 0,
+            playTime: 0
         })
     }
 
